@@ -8,6 +8,7 @@ export class FiltroPorTitulo implements PipeTransform {
     
     transform(fotos: FotoComponent[], digitado: string) {
         digitado = digitado.toLowerCase();
+        console.log('debug: ' + fotos[0].titulo);
         return fotos.filter(foto => foto.titulo.toLocaleLowerCase().includes(digitado));
     }
 }
