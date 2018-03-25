@@ -1,5 +1,5 @@
 <div class="container">
-
+    <h1 class="text-center">{{ foto.titulo }}</h1>
     <form class="row" [formGroup]="meuForm" (submit)="cadastrar($event)">
         <div class="col-md-6">
             <div class="form-group">
@@ -10,9 +10,14 @@
                     [(ngModel)]="foto.titulo" 
                     class="form-control" 
                     autocomplete="off">
-                <span *ngIf="meuForm.controls.titulo.invalid" class="form-control alert-danger">
-                    Título obrigatório
-                </span>
+                <div *ngIf="meuForm.controls.titulo.invalid">
+                    <span *ngIf="meuForm.controls.titulo.errors.required" class="form-control alert-danger">
+                        Título obrigatório
+                    </span>
+                    <span *ngIf="meuForm.controls.titulo.errors.minlength" class="form-control alert-danger">
+                        Título deve ter no mínimo 4 caracteres
+                    </span>
+                </div>
             </div>
             <div class="form-group">
                 <label>URL</label>
@@ -42,6 +47,9 @@
             </button>
              <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
             <hr>
+        </div>
+        <div class="col-md-6" *ngIf="foto.url">
+            <foto [url]="foto.url" [titulo]="foto.titulo"></foto>
         </div>
     </form>
 </div>
